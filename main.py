@@ -1,78 +1,84 @@
-from tkinter import *
-from tkinter import messagebox
-class car_rent_system:
-    def __init__(self):
-        self.Total_cars = 100
+class car_rent:
+    def __init__(self):  # constraint
+        self.total_car = 20  # total car in go dam
+        self.__db = {}  # data store of person
 
-    def bill_printing(self):
-        pass
+    def bill_print(self,*data):
+        printing_bill = f'''
+        welcome to car rental
+        cus_name = {data[0]}
+        aadhar no = {data[1]}
+        no of car = {data[2]}
+        no of days = {data[3]}
+        total bill = {data[4]}
+         Thank you '''
+        file_name = data[1]+".txt"
+        p = open(file_name, "w")
+        p.write(printing_bill)
+        p.close()
 
-    def car_on_rent(self):
-        var = messagebox.askyesno("Notification", "Cars in Agency :" + str(self.Total_cars) + " \n To confirm Yes/No....",)
-        if var == True:
+    # method
+    def rented_sys(self):  # peron pick up the car
+        no_car = int(input("enter your req car :"))
+        if no_car <= car.total_car:
+            no_day = int(input("How many day : "))
+            cus_name = input("Enter your name :")
+            aadhar_no = input("Enter your aadhar no :")
+            bill = no_day*no_car*500
+            print("your bill : ",bill)
+            conferm = input("Are you conferm y/n :")
+            if conferm == "y":
+                print("Car Successfully booked")
+                self.__db[aadhar_no] = [cus_name, no_car, no_day, bill]
+                self.bill_print(cus_name, aadhar_no, no_car, no_day, bill)
+                self.total_car = self.total_car - no_car
+            else:
+                print("Thank you for visiting")
 
-            def data_sumit():
-                messagebox.showinfo("Bill",
-                                 f"Name : {name} \n Aadhar : {aadhar} \n No of Cars : { cars} \n No of Days : {days}")
+        else:
+            print("not available")
 
-            car1 = Tk()
-            car1.title("Costumer Portal")
-            car1.config(bg="red")
-            car1.geometry("500x300")
-            label2 = Label(car1, text="Your Name", font=("times", 15, "bold"),anchor="w",bg="red")
-            label2.place(x=15, y=60, height=30, width=150)
-            Frame(car1,bg="black").place(x=15,y=89,height=2,width=100)
-            label3 = Label(car1, text="Your Aadhar ", font=("times", 14, "bold"),anchor="w")
-            label3.place(x=15,y=100,height=30,width=150)
-            Frame(car1, bg="black").place(x=15, y=120, height=2, width=100)
-            label4 = Label(car1, text="Required Car ", font=("times", 14, "bold"),anchor="w")
-            label4.place(x=15,y=145,height=30,width=150)
-            Frame(car1, bg="black").place(x=15, y=169, height=2, width=100)
-            label5 = Label(car1, text="How Many Days ", font=("times", 14, "bold"),anchor="w")
-            label5.place(x=15,y=188,height=30,width=150)
-            Frame(car1, bg="black").place(x=15, y=190, height=2, width=100)
 
-            name = StringVar()
-            aadhar = StringVar()
-            cars = StringVar()
-            days = StringVar()
-            entry1 =  Entry(car1,textvariable=name,font=("chillers",15, "bold"))
-            entry1.place(x=200,y=60,height=30,width=250)
-            entry2 =  Entry(car1,textvariable=aadhar,font=("chillers",15, "bold"))
-            entry2.place(x=200,y=100,height=30,width=250)
-            entry3 =  Entry(car1,textvariable=cars,font=("chillers",15, "bold"))
-            entry3.place(x=200,y=145,height=30,width=250)
-            entry4 =  Entry(car1,textvariable=days,font=("chillers",15, "bold"))
-            entry4.place(x=200,y=188,height=30,width=250)
+    def deposit_sys(self):  # person depositing car
+        adhar_no = input("Enter your aadhar no :")
+        if adhar_no in self.__db:
+            dpt_car = int(input("how many car u sumit :"))
+            if dpt_car < self.__db[adhar_no][1]:
+                self.__db[adhar_no][1] = self.__db[adhar_no][1] - dpt_car
+                self.total_car = self.total_car + dpt_car
+            elif dpt_car == self.__db[adhar_no][1]:
+                del self.__db[adhar_no]
+                self.total_car = self.total_car + dpt_car
+            elif dpt_car > self.__db[adhar_no][1]:
+                print("Wrong Input")
+        else:
+            print("aadhar no not exit")
 
-            button = Button(car1,text="Sumit",font=("times",20,"bold"),bg="blue",fg="white",activebackground="white",activeforeground="black", command=data_sumit)
-            button.place(x=180,y=240,height=40,width=140)
+    def show_database(self):
+        print(self.__db)
 
-            car1.mainloop()
-    def car_deposit(self):
-       pass
-    def potal_exite(self):
-        pass
-
-car = Tk()
-car.title("Car Agency")
-car.geometry("500x500+400+120")
-
-label1 = Label(car,text="Car Rent Agency ",font=("times",25,"bold"))
-label1.place(x=10,y=17,height=40,width=480)
-
-car_rent = car_rent_system()  #  create an intence of  the  car_ent_system class
-
-button1 = Button(car, text="RENT",font=("times",20,"bold"),bg="blue",fg="white",activebackground="white",activeforeground="black",
-                command = car_rent.car_on_rent)
-button1.place(x=160,y=100,height=80,width=180)
-button2 = Button(car, text="Deposit",font=("times",20,"bold"),bg="blue",fg="white",activebackground="white",activeforeground="black",
-                 command=car_rent.car_deposit )
-button2.place(x=160,y=210,height=80,width=180)
-button3 = Button(car, text="Exit",font=("times",20,"bold"),bg="blue",fg="white",activebackground="white",activeforeground="black",
-                 command=car_rent.potal_exite)
-button3.place(x=160,y=330,height=80,width=180)
-
-car.mainloop()
-
+car = car_rent()  # object
+print("Welcome to Car Agency")
+while True:  # to show the car details and rental
+    print("Total No of Car :", car.total_car)
+    option = input('''
+    1. car on rent 
+    2. car deposit
+    3. exit : ''')
+    if option =="1":
+        if car.total_car > 0 :
+             print("1 Car for 1 Day at rupee 500/-")
+             conferm = input("conferm y/n :")
+             if conferm == "y":
+                 car.rented_sys()
+             else:
+                 print("Thank You")
+    elif option == "2":
+        car.deposit_sys()
+    elif option == "3":
+        print("Thank You")
+        break
+    else:
+        print("Wrong input")
+    car.show_database()
 
