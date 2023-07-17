@@ -4,6 +4,9 @@ class car_rent_system:
     def __init__(self):
         self.Total_cars = 100
 
+    def bill_printing(self):
+        pass
+
     def car_on_rent(self):
         var = messagebox.askyesno("Notification", "Cars in Agency :" + str(self.Total_cars) + " \n To confirm Yes/No....",)
         if var == True:
@@ -24,13 +27,17 @@ class car_rent_system:
             label5.place(x=15,y=188,height=30,width=150)
             Frame(car1, bg="black").place(x=15, y=190, height=2, width=100)
 
-            entry1 =  Entry(car1,font=("chillers",15, "bold"))
+            name = StringVar()
+            aadhar = StringVar()
+            cars = StringVar()
+            days = StringVar()
+            entry1 =  Entry(car1,textvariable=name,font=("chillers",15, "bold"))
             entry1.place(x=200,y=60,height=30,width=250)
-            entry2 =  Entry(car1,font=("chillers",15, "bold"))
+            entry2 =  Entry(car1,textvariable=aadhar,font=("chillers",15, "bold"))
             entry2.place(x=200,y=100,height=30,width=250)
-            entry3 =  Entry(car1,font=("chillers",15, "bold"))
+            entry3 =  Entry(car1,textvariable=cars,font=("chillers",15, "bold"))
             entry3.place(x=200,y=145,height=30,width=250)
-            entry4 =  Entry(car1,font=("chillers",15, "bold"))
+            entry4 =  Entry(car1,textvariable=days,font=("chillers",15, "bold"))
             entry4.place(x=200,y=188,height=30,width=250)
 
             button = Button(car1,text="Sumit",font=("times",20,"bold"),bg="blue",fg="white",activebackground="white",activeforeground="black")
