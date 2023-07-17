@@ -14,7 +14,6 @@ class car_rent_system:
         p = open(file_name, "w")
         p.write(print_bill)
         p.close()
-
     def car_on_rent(self):
         var = messagebox.askyesno("Notification", "Cars in Agency :" + str(self.Total_cars) + " \n To confirm Yes/No....",)
         if var == True:
