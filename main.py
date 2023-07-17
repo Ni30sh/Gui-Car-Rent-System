@@ -10,6 +10,11 @@ class car_rent_system:
     def car_on_rent(self):
         var = messagebox.askyesno("Notification", "Cars in Agency :" + str(self.Total_cars) + " \n To confirm Yes/No....",)
         if var == True:
+
+            def data_sumit():
+                messagebox.showinfo("Bill",
+                                 f"Name : {name} \n Aadhar : {aadhar} \n No of Cars : { cars} \n No of Days : {days}")
+
             car1 = Tk()
             car1.title("Costumer Portal")
             car1.config(bg="red")
@@ -40,8 +45,9 @@ class car_rent_system:
             entry4 =  Entry(car1,textvariable=days,font=("chillers",15, "bold"))
             entry4.place(x=200,y=188,height=30,width=250)
 
-            button = Button(car1,text="Sumit",font=("times",20,"bold"),bg="blue",fg="white",activebackground="white",activeforeground="black")
+            button = Button(car1,text="Sumit",font=("times",20,"bold"),bg="blue",fg="white",activebackground="white",activeforeground="black", command=data_sumit)
             button.place(x=180,y=240,height=40,width=140)
+
             car1.mainloop()
     def car_deposit(self):
        pass
