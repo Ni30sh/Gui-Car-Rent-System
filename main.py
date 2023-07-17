@@ -4,16 +4,29 @@ class car_rent_system:
     def __init__(self):
         self.Total_cars = 100
 
-    def bill_printing(self):
-        pass
+    def bill_printing(self,*data):
+        print_bill = f"""
+        customer Name = {data[0]}
+        aadhar = {data[1]}
+        cars = {data[2]}
+        days = {data[3]}"""
+        file_name = data[1].get() + ".txt"
+        p = open(file_name, "w")
+        p.write(print_bill)
+        p.close()
 
     def car_on_rent(self):
         var = messagebox.askyesno("Notification", "Cars in Agency :" + str(self.Total_cars) + " \n To confirm Yes/No....",)
         if var == True:
 
             def data_sumit():
+                NAME = name.get()
+                AADHAR = aadhar.get()
+                CARS = cars.get()
+                DAYS = days.get()
+
                 messagebox.showinfo("Bill",
-                                 f"Name : {name} \n Aadhar : {aadhar} \n No of Cars : { cars} \n No of Days : {days}")
+                                 f"Name : {NAME} \n Aadhar : {AADHAR} \n No of Cars : {CARS} \n No of Days : {DAYS}")
 
             car1 = Tk()
             car1.title("Costumer Portal")
@@ -47,7 +60,7 @@ class car_rent_system:
 
             button = Button(car1,text="Sumit",font=("times",20,"bold"),bg="blue",fg="white",activebackground="white",activeforeground="black", command=data_sumit)
             button.place(x=180,y=240,height=40,width=140)
-
+            self.bill_printing(name,aadhar, cars, days, )
             car1.mainloop()
     def car_deposit(self):
        pass
