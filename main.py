@@ -15,7 +15,7 @@ class car_rent_system:
             def data_sumit(*args):
                 global  conn, cur
                 NAME_val = name.get()
-                AADHAR_val = aadhar.get()        # self.bill_printing(NAME, AADHAR, CARS, DAYS, )
+                AADHAR_val = aadhar.get()       
                 CARS_val = cars.get()
                 DAYS_val = days.get()
                 DATE_val = time.strftime("%d-%m-%Y")
@@ -102,20 +102,21 @@ def data_base():
         cur.execute(var)
         var1 = "USE CarRentalSystem"
         cur.execute(var1)
-        var2 = """CREATE TABLE AgencyDetails (
+        var2 = """CREATE TABLE IF NOT EXISTS AgencyDetails (
                      CUSTOMER_NAME VARCHAR(255), 
                      AADHAR BIGINT, 
                      CAR VARCHAR(255), 
                      NO_OF_DAYS VARCHAR(255),
                      DATE VARCHAR(255) )"""
         cur.execute(var2)
-        conn.close()
+        conn.commit()
         messagebox.showinfo("Database", "Successfully connected")
     except:
         strin = "USE CarRentalSystem"
         cur.execute(strin)
         messagebox.showinfo("Notification", "NOW YOU ARE CONNECTED TO THE DATABASE")
 
+data_base()
 
 car = Tk()
 car.title("Car Agency")
@@ -136,7 +137,6 @@ button3 = Button(car, text="Exit",font=("times",20,"bold"),bg="blue",fg="white",
                  command=car_rent.potal_exite)
 button3.place(x=160,y=330,height=80,width=180)
 
-data_base()
 car.mainloop()
 
 
