@@ -29,7 +29,17 @@ class car_rent_system:
                 messagebox.showinfo("Bill",
                                     f"Name : {NAME_val} \n Aadhar : {AADHAR_val} \n No of Cars : {CARS_val}"
                                     f" \n No of Days : {DAYS_val} \n date : {DATE_val}")
-
+                # def bill_printing(self, *data):
+                # print_bill = f"""
+                #     customer Name = {NAME_val}
+                #     aadhar = {AADHAR_val}
+                #     cars = {CARS_val}
+                #     days = {DAYS_val}"""
+                # file_name = AADHAR_val + ".txt"
+                # p = open(file_name, "w")
+                # p.write(print_bill)
+                # p.close()
+                # print_bill()
 
             car1 = Tk()
             car1.title("Costumer Portal")
