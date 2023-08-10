@@ -5,45 +5,41 @@ import mysql.connector
 class car_rent_system:
     def __init__(self):
         self.Total_cars = 100
-
-
     def car_on_rent(self):
-        
         var = messagebox.askyesno("Notification", "Cars in Agency :" + str(self.Total_cars) + " \n To confirm Yes/No....",)
         if var == True:
-
-            def data_sumit(*args):
-                global  conn, cur
-                NAME_val = name.get()
-                AADHAR_val = aadhar.get()        # self.bill_printing(NAME, AADHAR, CARS, DAYS, )
-                CARS_val = cars.get()
-                DAYS_val = days.get()
+            def data_sumit():
+                global conn, cur
+                NAME_val = name_var.get()
+                AADHAR_val = AADHAR_var.get()
+                CARS_val = cars_var.get()
+                DAYS_val = days_var.get()
                 DATE_val = time.strftime("%d-%m-%Y")
+
+                # Check if AADHAR_val is a valid integer before inserting into the database
+                if AADHAR_val.isdigit():
+                    # Convert AADHAR_val to an integer before inserting
+                    AADHAR_val = int(AADHAR_val)
+                else:
+                    messagebox.showerror("Error",
+                                         "Invalid AADHAR_var value. Please enter a valid integer value for AADHAR_var.")
+                    return  # Stop further execution if AADHAR is invalid
+
+                cur = conn.cursor()
                 use_database = "USE CarRentalSystem"
                 cur.execute(use_database)
-                cur = conn.cursor()
-                # var1 = "INSERT INTO AgencyDetails VALUES (%s,%s,%s,%s,%s)"
-                # var2 = (NAME_val, AADHAR_val, CARS_val,DAYS_val, DATE_val )
-                cur.execute("INSERT INTO AgencyDetails VALUES (%s,%s,%s,%s,%s)",(NAME_val, AADHAR_val, CARS_val, DAYS_val, DATE_val))
+
+                cur.execute(
+                    "INSERT INTO AgencyDetails (CUSTOMER_NAME, Aadhar_no, CAR, NO_OF_DAYS, DATE) VALUES (%s, %s, %s, %s, %s)",
+                    (NAME_val, AADHAR_val, CARS_val, DAYS_val, DATE_val))
                 conn.commit()
                 messagebox.showinfo("Bill",
-                                    f"Name : {NAME_val} \n Aadhar : {AADHAR_val} \n No of Cars : {CARS_val}"
-                                    f" \n No of Days : {DAYS_val} \n date : {DATE_val}")
-                # def bill_printing(self, *data):
-                # print_bill = f"""
-                #     customer Name = {NAME_val}
-                #     aadhar = {AADHAR_val}
-                #     cars = {CARS_val}
-                #     days = {DAYS_val}"""
-                # file_name = AADHAR_val + ".txt"
-                # p = open(file_name, "w")
-                # p.write(print_bill)
-                # p.close()
-                # print_bill()
+                                    f"Name: {NAME_val}\nAADHAR: {AADHAR_val}\nNo of Cars: {CARS_val}\nNo of Days: {DAYS_val}\nDate: {DATE_val}")
+
 
             car1 = Tk()
             car1.title("Costumer Portal")
-            car1.config(bg="red")
+            car1.config(bg="sky blue")
             car1.geometry("500x300")
 
             label2 = Label(car1, text="Your Name", font=("times", 15, "bold"),anchor="w",bg="red")
@@ -59,23 +55,23 @@ class car_rent_system:
             label5.place(x=15,y=188,height=30,width=150)
             Frame(car1, bg="black").place(x=15, y=190, height=2, width=100)
 
-            name = StringVar()
-            aadhar = StringVar()
-            cars = StringVar()
-            days = StringVar()
+            name_var = StringVar()
+            AADHAR_var = StringVar()  # Changed the name from AADHAR to AADHAR as a StringVar
+            cars_var = StringVar()
+            days_var = StringVar()
 
-            entry1 = Entry(car1,textvariable=name,font=("chillers",15, "bold"))
-            entry1.place(x=200,y=60,height=30,width=250)
-            entry2 = Entry(car1,textvariable=aadhar,font=("chillers",15, "bold"))
-            entry2.place(x=200,y=100,height=30,width=250)
-            entry3 = Entry(car1,textvariable=cars,font=("chillers",15, "bold"))
-            entry3.place(x=200,y=145,height=30,width=250)
-            entry4 = Entry(car1,textvariable=days,font=("chillers",15, "bold"))
-            entry4.place(x=200,y=188,height=30,width=250)
+            entry1 = Entry(car1, textvariable=name_var ,font=("chillers", 15, "bold"))
+            entry1.place(x=200, y=60, height=30, width=250)
+            entry2 = Entry(car1, textvariable=AADHAR_var, font=("chillers", 15, "bold"))
+            entry2.place(x=200, y=100, height=30, width=250)
+            entry3 = Entry(car1, textvariable=cars_var, font=("chillers", 15, "bold"))
+            entry3.place(x=200, y=145, height=30, width=250)
+            entry4 = Entry(car1, textvariable=days_var, font=("chillers", 15, "bold"))
+            entry4.place(x=200, y=188, height=30, width=250)
 
-            button = Button(car1,text="Sumit",font=("times",20,"bold"),bg="blue",fg="white",
-                            activebackground="white",activeforeground="black", command=data_sumit)
-            button.place(x=180,y=240,height=40,width=140)
+            button = Button(car1, text="Sumit", font=("times", 20, "bold"), bg="blue", fg="white",
+                            activebackground="white", activeforeground="black", command=data_sumit)
+            button.place(x=180, y=240, height=40, width=140)
             car1.mainloop()
 
         else:
@@ -103,11 +99,11 @@ def data_base():
         var1 = "USE CarRentalSystem"
         cur.execute(var1)
         var2 = """CREATE TABLE AgencyDetails (
-                     CUSTOMER_NAME VARCHAR(255), 
-                     AADHAR BIGINT, 
-                     CAR VARCHAR(255), 
-                     NO_OF_DAYS VARCHAR(255),
-                     DATE VARCHAR(255) )"""
+                     CUSTOMER_NAME VARCHAR(255),
+                     `Aadhar_no` BIGINT,  
+                     CAR int(11), 
+                     NO_OF_DAYS int(11),
+                     `DATE` VARCHAR(255) )"""
         cur.execute(var2)
         conn.close()
         messagebox.showinfo("Database", "Successfully connected")
