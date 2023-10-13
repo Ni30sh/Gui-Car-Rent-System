@@ -4,7 +4,7 @@ from tkinter import messagebox
 import mysql.connector
 class car_rent_system:
     def __init__(self):
-        self.Total_cars = 100
+        self.Total_cars = 200
     def car_on_rent(self):
 
         var = messagebox.askyesno("Notification", "Cars in Agency :" + str(self.Total_cars) + " \n To confirm Yes/No....",)
