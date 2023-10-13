@@ -6,7 +6,7 @@ class car_rent_system:
     def __init__(self):
         self.Total_cars = 100
     def car_on_rent(self):
-        
+
         var = messagebox.askyesno("Notification", "Cars in Agency :" + str(self.Total_cars) + " \n To confirm Yes/No....",)
         if var == True:
 
@@ -41,37 +41,37 @@ class car_rent_system:
 
             car1 = Tk()
             car1.title("Costumer Portal")
-            car1.config(bg="red")
-            car1.geometry("500x300")
+            car1.config(bg="sky blue")
+            car1.geometry("500x360")
 
-            label2 = Label(car1, text="Your Name", font=("times", 15, "bold"),anchor="w",bg="red")
+            label2 = Label(car1, text="Your Name", font=("times", 16, "bold"),anchor="sw",bg="sky blue",bd = 0)
             label2.place(x=15, y=60, height=30, width=150)
-            Frame(car1,bg="black").place(x=15,y=89,height=2,width=100)
-            label3 = Label(car1, text="Your Aadhar ", font=("times", 14, "bold"),anchor="w")
+            Frame(car1,bg="black").place(x=15,y=89,height=2,width=130)
+            label3 = Label(car1, text="Your Aadhar ", font=("times", 16, "bold"),anchor="w",bd = 0,bg="sky blue")
             label3.place(x=15,y=100,height=30,width=150)
-            Frame(car1, bg="black").place(x=15, y=120, height=2, width=100)
-            label4 = Label(car1, text="Required Car ", font=("times", 14, "bold"),anchor="w")
+            Frame(car1, bg="black").place(x=15, y=128, height=2, width=130)
+            label4 = Label(car1, text="Required Car ", font=("times", 16, "bold"),anchor="w",bd = 0,bg="sky blue")
             label4.place(x=15,y=145,height=30,width=150)
-            Frame(car1, bg="black").place(x=15, y=169, height=2, width=100)
-            label5 = Label(car1, text="How Many Days ", font=("times", 14, "bold"),anchor="w")
+            Frame(car1, bg="black").place(x=15, y=172, height=2, width=130)
+            label5 = Label(car1, text="Required Days ", font=("times", 16, "bold"),anchor="w",bd = 0,bg="sky blue")
             label5.place(x=15,y=188,height=30,width=150)
-            Frame(car1, bg="black").place(x=15, y=190, height=2, width=100)
+            Frame(car1, bg="black").place(x=15, y=213, height=2, width=130)
 
             name = StringVar()
             aadhar = StringVar()
             cars = StringVar()
             days = StringVar()
 
-            entry1 = Entry(car1,textvariable=name,font=("chillers",15, "bold"))
+            entry1 = Entry(car1,textvariable=name,font=("chillers",15, "bold"),bd = 0)
             entry1.place(x=200,y=60,height=30,width=250)
-            entry2 = Entry(car1,textvariable=aadhar,font=("chillers",15, "bold"))
+            entry2 = Entry(car1,textvariable=aadhar,font=("chillers",15, "bold"),bd = 0)
             entry2.place(x=200,y=100,height=30,width=250)
-            entry3 = Entry(car1,textvariable=cars,font=("chillers",15, "bold"))
+            entry3 = Entry(car1,textvariable=cars,font=("chillers",15, "bold"),bd = 0)
             entry3.place(x=200,y=145,height=30,width=250)
-            entry4 = Entry(car1,textvariable=days,font=("chillers",15, "bold"))
+            entry4 = Entry(car1,textvariable=days,font=("chillers",15, "bold"),bd = 0)
             entry4.place(x=200,y=188,height=30,width=250)
 
-            button = Button(car1,text="Sumit",font=("times",20,"bold"),bg="blue",fg="white",
+            button = Button(car1,text="Submit",font=("times",20,"bold"),bg="blue",fg="white",
                             activebackground="white",activeforeground="black", command=data_sumit)
             button.place(x=180,y=240,height=40,width=140)
             car1.mainloop()
