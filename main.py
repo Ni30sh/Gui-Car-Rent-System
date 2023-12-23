@@ -15,7 +15,7 @@ class car_rent_system:
             def data_sumit(*args):
                 global  conn, cur
                 NAME_val = entry1.get()
-                AADHAR_val = entry2.get()        # self.bill_printing(NAME, AADHAR, CARS, DAYS, )
+                AADHAR_val = entry2.get()      # self.bill_printing(NAME, AADHAR, CARS, DAYS, )
                 CARS_val = entry3.get()
                 DAYS_val = entry4.get()
                 DATE_val = time.strftime("%d-%m-%Y")
